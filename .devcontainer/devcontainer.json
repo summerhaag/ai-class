@@ -1,0 +1,6 @@
+{
+  "name": "AI Class Sandbox",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code @openai/codex",
+  "postAttachCommand": "echo 'Sandbox ready. Run: claude   or   codex'"
+}
