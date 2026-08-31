@@ -1,0 +1,289 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background: #fafafa;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.site-nav {
+  border-bottom: 1px solid #e2e2e2;
+  background: #fff;
+}
+
+.site-nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.site-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: 16px 0;
+  letter-spacing: -0.01em;
+}
+
+.page-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.page-tab {
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+  padding: 18px 4px 14px;
+  border-bottom: 2px solid transparent;
+}
+
+.page-tab:hover {
+  color: #1a1a1a;
+}
+
+.page-tab.active {
+  color: #1a1a1a;
+  font-weight: 600;
+  border-bottom-color: #3b5bdb;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+}
+
+.page-header,
+.page-footer {
+  max-width: 700px;
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+.page-header .lede {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 18px;
+}
+
+.page-header p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0 0 14px;
+}
+
+.page-footer {
+  margin-top: 28px;
+  font-size: 13px;
+  color: #888;
+}
+
+.viewer-frame {
+  margin-top: 40px;
+}
+
+.viewer {
+  position: relative;
+  width: 100%;
+  height: min(75vh, 720px);
+  min-height: 420px;
+  background: #0b0b12;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+}
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+
+#canvas:active {
+  cursor: grabbing;
+}
+
+#hud {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  color: #999;
+  font: 12px/1.4 monospace;
+  pointer-events: none;
+  user-select: none;
+  text-shadow: 0 1px 2px black;
+}
+
+.viewer-toolbar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.viewer-toolbar button {
+  font: 13px/1 -apple-system, sans-serif;
+  background: #1c1c28;
+  color: #eee;
+  border: 1px solid #3a3a4a;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.viewer-toolbar button:hover {
+  background: #26263a;
+}
+
+#panel {
+  position: absolute;
+  top: 52px;
+  right: 12px;
+  bottom: 12px;
+  width: 260px;
+  overflow-y: auto;
+  background: rgba(20, 20, 30, 0.92);
+  border: 1px solid #3a3a4a;
+  border-radius: 8px;
+  padding: 14px;
+  font: 13px/1.4 -apple-system, sans-serif;
+  color: #ddd;
+  z-index: 1;
+}
+
+#panel.hidden {
+  display: none;
+}
+
+.panel-section {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #333340;
+}
+
+.panel-section:last-child {
+  border-bottom: none;
+}
+
+.panel-section h2 {
+  font-size: 13px;
+  margin: 0 0 8px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.panel-section label {
+  display: block;
+  margin: 8px 0;
+}
+
+.panel-section input[type='number'],
+.panel-section input[type='text'] {
+  width: 100%;
+  box-sizing: border-box;
+  background: #10101a;
+  color: #eee;
+  border: 1px solid #3a3a4a;
+  border-radius: 4px;
+  padding: 4px 6px;
+  margin-top: 2px;
+}
+
+.quad-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.hint {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #888;
+  margin: 0 0 8px;
+}
+
+#preset {
+  width: 100%;
+  margin-bottom: 8px;
+  background: #10101a;
+  color: #eee;
+  border: 1px solid #3a3a4a;
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+
+#generate {
+  width: 100%;
+  background: #3b5bdb;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#generate:hover {
+  background: #4c6ef5;
+}
+
+.error {
+  color: #ff8787;
+  font-size: 12px;
+  margin-top: 8px;
+  min-height: 1.2em;
+}
+
+.range-label input[type='range'] {
+  width: 100%;
+}
+
+fieldset {
+  border: 1px solid #3a3a4a;
+  border-radius: 4px;
+  margin: 0 0 8px;
+  padding: 6px 8px;
+}
+
+fieldset label,
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 8px 4px 0;
+}
+
+.checkbox-label {
+  display: flex;
+}
