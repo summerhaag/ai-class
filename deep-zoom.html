@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apollonian Circle Packings — Deep Zoom</title>
+    <script type="module" crossorigin src="/ai-class/assets/deepZoom-Cb2lGyJv.js"></script>
+    <link rel="modulepreload" crossorigin href="/ai-class/assets/ui-BR3bq7KA.js">
+    <link rel="stylesheet" crossorigin href="/ai-class/assets/ui-DNKx3wbO.css">
+  </head>
+  <body>
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <a class="site-title" href="./index.html">Apollonian Circle Packings</a>
+        <div class="page-tabs" role="tablist" aria-label="Page">
+          <a class="page-tab" href="./index.html">Standard</a>
+          <a class="page-tab active" href="./deep-zoom.html" aria-current="page">Deep Zoom</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page">
+      <header class="page-header">
+        <h1>Deep Zoom</h1>
+        <p class="lede">
+          The same explorer, rebuilt on arbitrary-precision (Decimal) arithmetic instead of
+          float64, so zooming in doesn't hit a precision wall.
+        </p>
+        <p>
+          The <strong>Standard</strong> tab generates each new circle with ordinary JS numbers,
+          which only carry about 15-17 significant decimal digits — deep enough for a lot of
+          zooming, but the position math eventually loses precision and the camera has a hard
+          zoom ceiling to keep it from showing numerical garbage. This page runs the same
+          recursion with a configurable-precision decimal library instead, so the packing stays
+          accurate dozens of orders of magnitude deeper. The tradeoff is speed: decimal arithmetic
+          is much slower than native floats, so density defaults are lower here and circles
+          materialize a bit more lazily while you zoom — this page is built for patient, deliberate
+          exploration of one region, not a dense initial view.
+        </p>
+        <p>
+          The HUD's zoom readout is the giveaway: watch the exponent climb well past what the
+          standard page can reach before either running out of precision or of your patience.
+        </p>
+      </header>
+
+      <section class="viewer-frame">
+        <div class="viewer" id="viewer">
+          <canvas id="canvas"></canvas>
+          <div id="hud"></div>
+
+          <div class="viewer-toolbar">
+            <button id="reset-view" type="button">Reset view</button>
+            <button id="panel-toggle" type="button" aria-expanded="true">Controls</button>
+          </div>
+          <div id="panel">
+            <section class="panel-section">
+              <h2>Quadruple</h2>
+              <div class="quad-inputs">
+                <input type="text" inputmode="text" id="k1" placeholder="e.g. -1" aria-label="Curvature 1" />
+                <input type="text" inputmode="text" id="k2" placeholder="e.g. 2" aria-label="Curvature 2" />
+                <input type="text" inputmode="text" id="k3" placeholder="e.g. 2" aria-label="Curvature 3" />
+                <input type="text" inputmode="text" id="k4" placeholder="e.g. (1+sqrt(2))^2" aria-label="Curvature 4" />
+              </div>
+              <p class="hint">Expressions allowed: + - * / ^ sqrt(). Use 0 for a straight line.</p>
+              <select id="preset"></select>
+              <button id="generate" type="button">Generate</button>
+              <div id="quad-error" class="error" role="alert"></div>
+            </section>
+
+            <section class="panel-section">
+              <label class="range-label">
+                Max depth: <span id="depth-value"></span>
+                <input type="range" id="max-depth" min="1" max="18" />
+              </label>
+              <label>
+                Max circle count
+                <input type="number" id="max-count" min="1" max="4000" step="50" />
+              </label>
+              <p class="hint">Kept lower than the standard page's defaults — decimal arithmetic is
+              slower, and depth here comes from zooming in, not from pre-generating densely.</p>
+            </section>
+
+            <section class="panel-section">
+              <fieldset>
+                <legend>Style</legend>
+                <label><input type="radio" name="render-mode" value="filled" checked /> Filled</label>
+                <label><input type="radio" name="render-mode" value="outline" /> Outline</label>
+              </fieldset>
+              <label class="checkbox-label">
+                <input type="checkbox" id="integral-mode" />
+                Integral packing (whole-number curvatures + labels)
+              </label>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <p>
+          Built on the Descartes Circle Theorem, rendered with HTML5 Canvas, arbitrary-precision
+          arithmetic via <a href="https://mikemcl.github.io/decimal.js/">decimal.js</a>.
+        </p>
+      </footer>
+    </div>
+
+  </body>
+</html>

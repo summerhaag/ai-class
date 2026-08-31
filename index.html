@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apollonian Circle Packings</title>
+    <script type="module" crossorigin src="/ai-class/assets/main-BcAZ7Zeb.js"></script>
+    <link rel="modulepreload" crossorigin href="/ai-class/assets/ui-BR3bq7KA.js">
+    <link rel="stylesheet" crossorigin href="/ai-class/assets/ui-DNKx3wbO.css">
+  </head>
+  <body>
+    <nav class="site-nav">
+      <div class="site-nav-inner">
+        <a class="site-title" href="./index.html">Apollonian Circle Packings</a>
+        <div class="page-tabs" role="tablist" aria-label="Page">
+          <a class="page-tab active" href="./index.html" aria-current="page">Standard</a>
+          <a class="page-tab" href="./deep-zoom.html">Deep Zoom</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page">
+      <header class="page-header">
+        <h1>Standard Explorer</h1>
+        <p class="lede">
+          An interactive explorer for Apollonian gaskets — fractal circle packings built by
+          repeatedly filling the gaps between mutually tangent circles.
+        </p>
+        <p>
+          Starting from four mutually tangent circles, Descartes' Circle Theorem gives a simple
+          formula for a new circle tangent to any three of them. Repeating this in every gap,
+          forever, produces the gasket: an infinite, self-similar packing whose circles shrink
+          without bound.
+        </p>
+        <p>
+          Scroll or pinch to zoom, drag to pan — new circles are generated as you go, so you can
+          zoom in indefinitely. Use the panel to type in your own four tangent curvatures, pick a
+          preset, control how many circles are generated up front, switch between filled and
+          outline rendering, or turn on integral mode to see the classic whole-number curvature
+          labels. A curvature of 0 is a straight line, so quadruples like a half-plane or a strip
+          (two parallel lines) work too; curvature fields also accept algebraic expressions such
+          as <code>(1+sqrt(2))^2</code>.
+        </p>
+      </header>
+
+      <section class="viewer-frame">
+        <div class="viewer" id="viewer">
+          <canvas id="canvas"></canvas>
+          <div id="hud"></div>
+
+          <div class="viewer-toolbar">
+            <button id="reset-view" type="button">Reset view</button>
+            <button id="panel-toggle" type="button" aria-expanded="true">Controls</button>
+          </div>
+          <div id="panel">
+            <section class="panel-section">
+              <h2>Quadruple</h2>
+              <div class="quad-inputs">
+                <input type="text" inputmode="text" id="k1" placeholder="e.g. -1" aria-label="Curvature 1" />
+                <input type="text" inputmode="text" id="k2" placeholder="e.g. 2" aria-label="Curvature 2" />
+                <input type="text" inputmode="text" id="k3" placeholder="e.g. 2" aria-label="Curvature 3" />
+                <input type="text" inputmode="text" id="k4" placeholder="e.g. (1+sqrt(2))^2" aria-label="Curvature 4" />
+              </div>
+              <p class="hint">Expressions allowed: + - * / ^ sqrt(). Use 0 for a straight line.</p>
+              <select id="preset"></select>
+              <button id="generate" type="button">Generate</button>
+              <div id="quad-error" class="error" role="alert"></div>
+            </section>
+
+            <section class="panel-section">
+              <label class="range-label">
+                Max depth: <span id="depth-value"></span>
+                <input type="range" id="max-depth" min="1" max="30" />
+              </label>
+              <label>
+                Max circle count
+                <input type="number" id="max-count" min="1" max="30000" step="100" />
+              </label>
+            </section>
+
+            <section class="panel-section">
+              <fieldset>
+                <legend>Style</legend>
+                <label><input type="radio" name="render-mode" value="filled" checked /> Filled</label>
+                <label><input type="radio" name="render-mode" value="outline" /> Outline</label>
+              </fieldset>
+              <label class="checkbox-label">
+                <input type="checkbox" id="integral-mode" />
+                Integral packing (whole-number curvatures + labels)
+              </label>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <p>
+          Built on the Descartes Circle Theorem, rendered with HTML5 Canvas. Zooming stalls once
+          this page's float64 math runs out of precision — try the
+          <strong>Deep Zoom</strong> tab above for unlimited depth.
+        </p>
+      </footer>
+    </div>
+
+  </body>
+</html>
