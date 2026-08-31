@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 // variant) — `vite dev` serves any root HTML file by path without config,
 // but `vite build` only bundles index.html unless every entry is listed here.
 export default defineConfig({
+  base: '/ai-class/',
   build: {
     rollupOptions: {
       input: {
